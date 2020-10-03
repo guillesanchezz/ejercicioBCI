@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.0-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.exerciseBCI'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+  	
+  	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+    compile group: 'com.sun.jersey', name: 'jersey-json', version: '1.12'
+    compile group: 'javax.json', name: 'javax.json-api', version: '1.0-b01'
+    
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    
+   
+    
+    
+  }
+}
+
+test {
+	useJUnitPlatform()
+}
