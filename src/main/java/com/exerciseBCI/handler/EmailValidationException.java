@@ -5,7 +5,7 @@ import java.util.Objects;
 public class EmailValidationException extends ValidationException{
 	
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE_DEFAULT = "Email inválido";
+	private static final String MESSAGE_DEFAULT = "Email invalid";
 	
 	@Override
 	public String getMessage() {

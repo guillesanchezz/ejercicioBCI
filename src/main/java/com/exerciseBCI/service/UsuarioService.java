@@ -17,5 +17,9 @@ public interface UsuarioService {
 	public Optional<UsuarioDTO> getUsuario(String usuarioId);
 
 	public Optional<UsuarioDTO> replaceUsuario(String usuarioId, UsuarioDTO usuarioResponseDTO);
+
+	public Optional<UsuarioDTO> getUsuarioByEmail(String email);
+	
+	public void updateToken(String usuarioId,String token);
 	
 }

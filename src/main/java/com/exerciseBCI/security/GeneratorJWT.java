@@ -1,4 +1,4 @@
-package com.exerciseBCI.util;
+package com.exerciseBCI.security;
 
 import java.util.Date;
 
@@ -11,16 +11,16 @@ public class GeneratorJWT {
 
 	
 	
-	public String generarToken(RegistroDTO usuario) {
+	public String generarToken(String email, String pass) {
 		
-		String key = usuario.getPassword();
+		String key = pass;
 		long tiempo = System.currentTimeMillis();
 		String jwt = Jwts.builder()
 							.signWith(SignatureAlgorithm.HS256, key)
-							.setSubject(usuario.getName())
+							.setSubject(email)
 							.setIssuedAt(new Date(tiempo))
 							.setExpiration(new Date(tiempo+900000))
-							.claim("email", usuario.getEmail())
+							.claim("email", email)
 							.compact();
 		
 		

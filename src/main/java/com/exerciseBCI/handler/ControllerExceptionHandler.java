@@ -24,6 +24,11 @@ public class ControllerExceptionHandler {
 	    protected ResponseEntity<ErrorDTO> handleExceptionNotFound(UsuarioNotFoundException ex) {
 	    	return buildResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND); 
 	    }
+	 
+	 @ExceptionHandler(PasswordIncorrectException.class)
+	    protected ResponseEntity<ErrorDTO> handleException(PasswordIncorrectException ex) {
+	    	return buildResponseEntity(ex.getMessage(), HttpStatus.FORBIDDEN);
+	    }
 	
 	@ExceptionHandler(Exception.class)
 	    protected ResponseEntity<ErrorDTO> handleException(Exception ex) {

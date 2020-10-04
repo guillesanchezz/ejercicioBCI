@@ -24,9 +24,9 @@ import com.exerciseBCI.handler.PasswordValidationException;
 import com.exerciseBCI.handler.UsuarioNotFoundException;
 import com.exerciseBCI.repository.TelefonoRepository;
 import com.exerciseBCI.repository.UsuarioRepository;
+import com.exerciseBCI.security.GeneratorJWT;
 import com.exerciseBCI.service.UsuarioService;
 import com.exerciseBCI.util.EmailValidator;
-import com.exerciseBCI.util.GeneratorJWT;
 import com.exerciseBCI.util.PasswordValidator;
 
 @Service
@@ -36,9 +36,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private TelefonoRepository telefonoRepository;
 		
 	@Override
 	public Optional<UsuarioDTO> createUsuario(RegistroDTO body) {
@@ -79,9 +76,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	private UsuarioEntity convertRegistroDTOToUsuarioEntity(RegistroDTO source) {
 		
-		
 		final GeneratorJWT generatorJWT= new GeneratorJWT();
-		String token = generatorJWT.generarToken(source);
+		String token = generatorJWT.generarToken(source.getEmail(),source.getPassword());
 		
 		UsuarioEntity usuarioEntity = new UsuarioEntity(source.getName(),
 														source.getEmail(),
@@ -224,5 +220,35 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return Optional.ofNullable(convertUsuarioEntityToUsuarioDTO(usuarioEntitySave));
 		
 	}
+	
+	@Override
+	public Optional<UsuarioDTO> getUsuarioByEmail(String email) {
+		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findByEmail(email);
+			
+		if (!usuarioEntity.isPresent()) {
+			throw new UsuarioNotFoundException();
+		}
+		
+		return Optional.ofNullable(convertUsuarioEntityToUsuarioDTO(usuarioEntity.get()));
+	}
+
+
+	@Override
+	public void updateToken(String usuarioId,String token) {
+		
+		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findById(Integer.valueOf(usuarioId));
+		
+		usuarioEntity.get().setLastLogin(new Date());
+		usuarioEntity.get().setToken(token);
+	
+		try {
+			usuarioRepository.save(usuarioEntity.get());
+		}catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	
 
 }
