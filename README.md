@@ -6,7 +6,7 @@
 
 > Nota: Para ejecutar el comando de Gradle tendremos que estar ubicados en la carpeta raíz del proyecto.
 
-### Forma: Comando de Ejecucion
+### Comando de Ejecucion
 
     gradle bootRun
 
