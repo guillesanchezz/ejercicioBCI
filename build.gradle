@@ -35,9 +35,10 @@ dependencies {
     compile group: 'com.sun.jersey', name: 'jersey-json', version: '1.12'
     compile group: 'javax.json', name: 'javax.json-api', version: '1.0-b01'
     
-    testImplementation 'org.mockito:mockito-core:2.7.22'
-    
-   
+    testCompile 'org.junit.jupiter:junit-jupiter-api'
+	testCompile 'org.junit.jupiter:junit-jupiter-engine'
+	testCompile 'org.mockito:mockito-junit-jupiter'
+	testCompile 'org.mockito:mockito-core'
     
     
   }
