@@ -2,7 +2,7 @@
 
 **Requerimientos**
 * Tener instalado la JDK 8
-* Tener instalado Gradle 6.5.1
+* Tener instalado Gradle 6.6.1
 
 > Nota: Para ejecutar el comando de Gradle tendremos que estar ubicados en la carpeta raíz del proyecto.
 
