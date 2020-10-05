@@ -27,18 +27,20 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public Optional<LoginResponseDTO> getToken(LoginDTO body) {
+		logger.info("Comienza la obtencion de token para usuario");
 		Optional<UsuarioDTO> usuarioDTO = usuarioService.getUsuarioByEmail(body.getUser());
+		
 		if(!usuarioDTO.get().getPassword().equals(body.getPass())) {
 			throw new PasswordIncorrectException();
 		}
 				
 		final GeneratorJWT generatorJWT= new GeneratorJWT();
-		String token = generatorJWT.generarToken(body.getUser(),body.getPass());
+		String token = generatorJWT.generarToken(body.getUser());
 		
 		usuarioService.updateToken(usuarioDTO.get().getId().toString(), token);
 		
 		LoginResponseDTO loginResonseDTO = new LoginResponseDTO("Bearer "+token);
-
+		logger.info("Finaliza la obtencion y atualizacion de token de usuario");
 		return Optional.ofNullable(loginResonseDTO);
 	}
 

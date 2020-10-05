@@ -1,4 +1,5 @@
 insert into USUARIO (ID, CREATED,EMAIL,IS_ACTIVE,LAST_LOGIN,MODIFIED,NAME,PASSWORD,TOKEN) values
-(1,'2020-08-20T19:33:38', 'mjofre@gmail.com',true,'2020-08-20T19:33:38','2020-08-20T19:33:38','Guillermo Sanchez','holis','adsfasdfasdfasdf');
-insert into TELEFONO (ID,CITY_CODE,COUNTRY_CODE,NUMBER,USUARIO_ID) values(1,589,264,549,1);
+(100,'2020-08-20T19:33:38', 'guillermo.sanchez@dominio.cl',true,'2020-08-20T19:33:38','2020-08-20T19:33:38','Guillermo Sanchez','password',null);
+insert into TELEFONO (ID,CITY_CODE,COUNTRY_CODE,NUMBER,USUARIO_ID) values(100,2,54,541121,100);
+insert into TELEFONO (ID,CITY_CODE,COUNTRY_CODE,NUMBER,USUARIO_ID) values(101,2,54,542342,100);
 

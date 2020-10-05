@@ -2,25 +2,24 @@ package com.exerciseBCI.controller.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.exerciseBCI.controller.LoginController;
 import com.exerciseBCI.dto.LoginDTO;
 import com.exerciseBCI.dto.LoginResponseDTO;
 import com.exerciseBCI.service.LoginService;
-import com.exerciseBCI.service.UsuarioService;
 
 @Controller
-@RequestMapping("/api/v1")
 public class LoginControllerImpl implements LoginController {
 	
 	private LoginService loginService;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public LoginControllerImpl(LoginService loginService) {
 		this.loginService = loginService;
@@ -28,11 +27,13 @@ public class LoginControllerImpl implements LoginController {
 
 	
 	@Override
-	@PostMapping(path="/login")
+	@PostMapping("login")
 	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO body) {
-		
+		logger.info("Login de usuario");
 		Optional<LoginResponseDTO> result = loginService.getToken(body); 
+		logger.info("Finaliza Login de usuario");
 		return new ResponseEntity<>(result.get(), HttpStatus.OK);
+		
 	}
 	
 	

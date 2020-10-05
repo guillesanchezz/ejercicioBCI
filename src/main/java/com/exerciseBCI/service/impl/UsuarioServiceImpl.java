@@ -39,13 +39,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 	@Override
 	public Optional<UsuarioDTO> createUsuario(RegistroDTO body) {
-			
+		logger.info("Se prentende crear un usuario");
 		UsuarioEntity usuarioEntity = null;
 		
 		validate(body.getEmail(),body.getPassword());
 			
 		usuarioEntity = convertRegistroDTOToUsuarioEntity(body);
 		UsuarioEntity usuarioEntity2 = null;
+		
 		
 		try {
 			usuarioEntity2 = usuarioRepository.save(usuarioEntity);
@@ -55,7 +56,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		catch (Exception e) {
 		  throw e;
 		}
-				
+		logger.info("Finaliza la creacion de usuario");		
 		return Optional.ofNullable(convertUsuarioEntityToUsuarioDTO(usuarioEntity2));
 		
 	}
@@ -77,7 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioEntity convertRegistroDTOToUsuarioEntity(RegistroDTO source) {
 		
 		final GeneratorJWT generatorJWT= new GeneratorJWT();
-		String token = generatorJWT.generarToken(source.getEmail(),source.getPassword());
+		String token = generatorJWT.generarToken(source.getEmail());
 		
 		UsuarioEntity usuarioEntity = new UsuarioEntity(source.getName(),
 														source.getEmail(),
@@ -146,23 +147,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Optional<List<UsuarioDTO>> getUsuarios() {
-		
+		logger.info("Comienza la busqueda de usuarios");
 		final List<UsuarioDTO> usuarios = usuarioRepository.findAll().stream()
 				.map(usuario -> convertUsuarioEntityToUsuarioDTO(usuario)).collect(Collectors.toList());
 		
 		if (usuarios.size() == 0) {
 			throw new UsuarioNotFoundException();
 		}
-		
+		logger.info("Finaliza la busqueda de usuarios");
 		return Optional.ofNullable(usuarios);
 	}
 
 
 	@Override
 	public void deleteUsuario(String usuarioId) {
-		
+		logger.info("Se pretende eliminar usuario con ID : " + usuarioId);
 		try {
 			this.usuarioRepository.deleteById(Integer.valueOf(usuarioId));
+			logger.info("Se eliminor usuario con ID : " + usuarioId);
 		}catch (EmptyResultDataAccessException e) {
 			throw new UsuarioNotFoundException();
 		}catch (Exception e) {
@@ -175,19 +177,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Optional<UsuarioDTO> getUsuario(String usuarioId) {
+		
+		logger.info("Comienza la busqueda de usuario con ID : " + usuarioId);
 		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findById(Integer.valueOf(usuarioId));
 			
 		if (!usuarioEntity.isPresent()) {
 			throw new UsuarioNotFoundException();
 		}
-		
+		logger.info("Finaliza busqueda de usuario con ID: " + usuarioId);
 		return Optional.ofNullable(convertUsuarioEntityToUsuarioDTO(usuarioEntity.get()));
 	}
 
 
 	@Override
 	public Optional<UsuarioDTO> replaceUsuario(String usuarioId, UsuarioDTO body) {
-		
+		logger.info("Se pretende reemplazar usuario con ID: " + usuarioId);
 		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findById(Integer.valueOf(usuarioId));
 		
 		if (!usuarioEntity.isPresent()) {
@@ -212,6 +216,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		UsuarioEntity usuarioEntitySave = null;
 		try {
 			usuarioEntitySave = usuarioRepository.save(usuarioNew);
+			logger.info("Finalizo el reemplazo de usuario con ID: " + usuarioId);
 		}catch (Exception e) {
 			throw e;
 		}
@@ -223,12 +228,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public Optional<UsuarioDTO> getUsuarioByEmail(String email) {
+		logger.info("Comienza busqueda de usuario con email: " + email);
 		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findByEmail(email);
 			
 		if (!usuarioEntity.isPresent()) {
 			throw new UsuarioNotFoundException();
 		}
-		
+		logger.info("Finaliza busqueda de usuario con email: " + email);
 		return Optional.ofNullable(convertUsuarioEntityToUsuarioDTO(usuarioEntity.get()));
 	}
 
@@ -236,6 +242,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void updateToken(String usuarioId,String token) {
 		
+		logger.info("Comienza update de token de usuario con ID: " + usuarioId);
 		Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findById(Integer.valueOf(usuarioId));
 		
 		usuarioEntity.get().setLastLogin(new Date());
@@ -243,6 +250,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 		try {
 			usuarioRepository.save(usuarioEntity.get());
+			logger.info("Finalizo update de token de usuario con ID: " + usuarioId);
 		}catch (Exception e) {
 			throw e;
 		}
