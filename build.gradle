@@ -17,33 +17,22 @@ repositories {
 dependencies {
 	
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
-	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
-  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.apache.logging.log4j:log4j-api:2.18.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
   	
   	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.h2database:h2'
-	
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    
-    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
-    compile group: 'com.sun.jersey', name: 'jersey-json', version: '1.12'
-    compile group: 'javax.json', name: 'javax.json-api', version: '1.0-b01'
-    
-    testCompile 'org.junit.jupiter:junit-jupiter-api'
-	testCompile 'org.junit.jupiter:junit-jupiter-engine'
-	testCompile 'org.mockito:mockito-junit-jupiter'
-	testCompile 'org.mockito:mockito-core'
-    
-    
+
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.2'
+
   }
-}
 
 test {
 	useJUnitPlatform()
 }
+
+

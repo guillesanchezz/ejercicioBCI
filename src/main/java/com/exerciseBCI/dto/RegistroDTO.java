@@ -3,6 +3,7 @@ package com.exerciseBCI.dto;
 import java.util.List;
 
 public class RegistroDTO {
+
 	private String name;
 	private String email;
 	private String password;
@@ -10,7 +11,6 @@ public class RegistroDTO {
 	
 	public RegistroDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RegistroDTO(String name, String email, String password, List<PhoneDTO> phones) {
@@ -52,7 +52,15 @@ public class RegistroDTO {
 	public void setPhones(List<PhoneDTO> phones) {
 		this.phones = phones;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "RegistroDTO{" +
+				"name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", phones=" + phones +
+				'}';
+	}
 }

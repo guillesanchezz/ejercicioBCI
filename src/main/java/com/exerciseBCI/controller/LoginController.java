@@ -1,12 +1,12 @@
 package com.exerciseBCI.controller;
 
+import com.exerciseBCI.dto.UsuarioDTO;
 import org.springframework.http.ResponseEntity;
 
 import com.exerciseBCI.dto.LoginDTO;
-import com.exerciseBCI.dto.LoginResponseDTO;
 
 
 public interface LoginController {
 
-	ResponseEntity<LoginResponseDTO> login(LoginDTO body);
+	ResponseEntity<UsuarioDTO> login(LoginDTO body);
 }

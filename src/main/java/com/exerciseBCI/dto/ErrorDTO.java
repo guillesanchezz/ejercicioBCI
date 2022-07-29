@@ -1,26 +1,29 @@
 package com.exerciseBCI.dto;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class ErrorDTO {
 	
-	private static final String  DEFAULT_MESSAGE = "Unexpected error";  
-	
-	private String message;
-	
-	public ErrorDTO() {
-    	super();
-    }
-	
-	public ErrorDTO(String message) {
-    	super();
-    	this.message = message;
-    }
-	
-	public String getMessage() {
-    	if(Objects.nonNull(this.message)) {
-    		return this.message;
-    	}
-    	return DEFAULT_MESSAGE;
-    }
+	private final LocalDateTime timestamp;
+	private final Integer code;
+	private final String detail;
+
+	public ErrorDTO(LocalDateTime timestamp, Integer code, String detail) {
+		super();
+		this.timestamp = timestamp;
+		this.code = code;
+		this.detail = detail;
+	}
+
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
 }

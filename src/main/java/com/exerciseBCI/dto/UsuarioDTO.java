@@ -1,23 +1,22 @@
 package com.exerciseBCI.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UsuarioDTO extends RegistroDTO {
-	private Integer id;
-	private Date created;
-	private Date modified;
-	private Date lastLogin;
+	private String id;
+	private LocalDateTime created;
+	private LocalDateTime modified;
+	private LocalDateTime lastLogin;
 	private String token;
 	private Boolean isActive;
 	
 	public UsuarioDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public UsuarioDTO(String name, String email, String password, List<PhoneDTO> phones,
-			Integer id, Date created, Date modified, Date lastLogin, String token, Boolean isActive) {
+					  String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, String token, Boolean isActive) {
 			super(name, email, password, phones);
 			this.id = id;
 			this.created = created;
@@ -27,35 +26,35 @@ public class UsuarioDTO extends RegistroDTO {
 			this.isActive = isActive;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Date getCreated() {
+	public LocalDateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
 
-	public Date getModified() {
+	public LocalDateTime getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	public void setModified(LocalDateTime modified) {
 		this.modified = modified;
 	}
 
-	public Date getLastLogin() {
+	public LocalDateTime getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(Date lastLogin) {
+	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
@@ -74,8 +73,5 @@ public class UsuarioDTO extends RegistroDTO {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	
-	
-	
+
 }

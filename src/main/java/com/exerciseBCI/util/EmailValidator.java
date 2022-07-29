@@ -1,8 +1,11 @@
 package com.exerciseBCI.util;
 
+import org.springframework.stereotype.Component;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class EmailValidator {
 	private Pattern pattern;
 	private Matcher matcher;

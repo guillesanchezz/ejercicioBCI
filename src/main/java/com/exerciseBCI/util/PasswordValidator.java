@@ -1,8 +1,11 @@
 package com.exerciseBCI.util;
 
+import org.springframework.stereotype.Component;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class PasswordValidator {
 	private Pattern pattern;
 	private Matcher matcher;
@@ -22,7 +25,6 @@ public class PasswordValidator {
 	 * @return true valid hex, false invalid hex
 	 */
 	public boolean validate(final String hex) {
-
 		matcher = pattern.matcher(hex);
 		return matcher.matches();
 

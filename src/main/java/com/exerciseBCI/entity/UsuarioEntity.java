@@ -1,30 +1,30 @@
 package com.exerciseBCI.entity;
 
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "USUARIOS")
 public class UsuarioEntity implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@Type(type = "uuid-char")
+	private UUID id = UUID.randomUUID();
 	private String name;
 	@Column(unique = true)
 	private String email;
@@ -36,10 +36,9 @@ public class UsuarioEntity implements Serializable {
 			orphanRemoval = true
 	)
 	private List<TelefonoEntity> telefonos = new ArrayList<>();
-	private Date created;
-	private Date modified;
-	private Date lastLogin;
-	private String token;
+	private LocalDateTime created;
+	private LocalDateTime modified;
+	private LocalDateTime lastLogin;
 	private Boolean isActive;
 	
 	public UsuarioEntity() {
@@ -48,7 +47,7 @@ public class UsuarioEntity implements Serializable {
 	}
 
 	public UsuarioEntity(String name, String email, String password,
-			Date created, Date modified, Date lastLogin, String token, Boolean isActive) {
+						 LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, Boolean isActive) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -56,7 +55,6 @@ public class UsuarioEntity implements Serializable {
 		this.created = created;
 		this.modified = modified;
 		this.lastLogin = lastLogin;
-		this.token = token;
 		this.isActive = isActive;
 	}
 
@@ -92,44 +90,36 @@ public class UsuarioEntity implements Serializable {
 		this.telefonos = telefonos;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
-	public Date getCreated() {
+	public LocalDateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
 
-	public Date getModified() {
+	public LocalDateTime getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	public void setModified(LocalDateTime modified) {
 		this.modified = modified;
 	}
 
-	public Date getLastLogin() {
+	public LocalDateTime getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(Date lastLogin) {
+	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public Boolean getIsActive() {
@@ -139,7 +129,9 @@ public class UsuarioEntity implements Serializable {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+	public void updateLastLogin() {
+		setLastLogin(LocalDateTime.now());
+	}
+
 }
