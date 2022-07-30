@@ -1,8 +1,8 @@
 package com.exerciseBCI.util;
 
 import com.exerciseBCI.dto.LoginDTO;
-import com.exerciseBCI.dto.RegistroDTO;
-import com.exerciseBCI.entity.UsuarioEntity;
+import com.exerciseBCI.dto.RequestDTO;
+import com.exerciseBCI.entity.UserEntity;
 import com.exerciseBCI.handler.EmailValidationException;
 import com.exerciseBCI.handler.PasswordIncorrectException;
 import com.exerciseBCI.handler.PasswordValidationException;
@@ -21,7 +21,7 @@ public class Validator {
         this.passwordValidator = passwordValidator;
     }
 
-    public void validarRegistroUsuario(RegistroDTO usuario) {
+    public void validarRegistroUsuario(RequestDTO usuario) {
         if (isNull(usuario.getEmail()) || !emailValidator.validate(usuario.getEmail())) {
             throw new EmailValidationException();
         }
@@ -31,8 +31,8 @@ public class Validator {
         }
     }
 
-    public void validarPassword(LoginDTO login, UsuarioEntity usuarioEntity) {
-        if (!login.getPass().equals(usuarioEntity.getPassword())){
+    public void validarPassword(LoginDTO login, UserEntity userEntity) {
+        if (!login.getPassword().equals(userEntity.getPassword())){
             throw new PasswordIncorrectException();
         }
     }

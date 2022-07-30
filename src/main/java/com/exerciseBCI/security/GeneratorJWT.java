@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Component
 public class GeneratorJWT {
 
-    public String generarToken(String email) {
+    public String generateToken(String email) {
 
         String key = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROL_USUARIO");
+                .commaSeparatedStringToAuthorityList("ROL_USER");
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, key.getBytes())
                 .setSubject(email)

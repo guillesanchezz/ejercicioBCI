@@ -3,7 +3,7 @@ package com.exerciseBCI.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class UsuarioDTO extends RegistroDTO {
+public class UserDTO extends RequestDTO {
 	private String id;
 	private LocalDateTime created;
 	private LocalDateTime modified;
@@ -11,12 +11,12 @@ public class UsuarioDTO extends RegistroDTO {
 	private String token;
 	private Boolean isActive;
 	
-	public UsuarioDTO() {
+	public UserDTO() {
 		super();
 	}
 	
-	public UsuarioDTO(String name, String email, String password, List<PhoneDTO> phones,
-					  String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, String token, Boolean isActive) {
+	public UserDTO(String name, String email, String password, List<PhoneDTO> phones,
+				   String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, String token, Boolean isActive) {
 			super(name, email, password, phones);
 			this.id = id;
 			this.created = created;

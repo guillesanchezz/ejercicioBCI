@@ -1,11 +1,11 @@
 package com.exerciseBCI.service.impl;
 
-import com.exerciseBCI.convert.ConvertUsuario;
+import com.exerciseBCI.convert.ConvertUser;
 import com.exerciseBCI.dto.LoginDTO;
-import com.exerciseBCI.dto.UsuarioDTO;
-import com.exerciseBCI.entity.UsuarioEntity;
-import com.exerciseBCI.handler.UsuarioNotFoundException;
-import com.exerciseBCI.repository.UsuarioRepository;
+import com.exerciseBCI.dto.UserDTO;
+import com.exerciseBCI.entity.UserEntity;
+import com.exerciseBCI.handler.UserNotFoundException;
+import com.exerciseBCI.repository.UserRepository;
 import com.exerciseBCI.service.LoginService;
 import com.exerciseBCI.util.Validator;
 import org.slf4j.Logger;
@@ -19,39 +19,39 @@ public class LoginServiceImpl implements LoginService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
     private final Validator validator;
-    private final ConvertUsuario convertUsuario;
+    private final ConvertUser convertUser;
 
-    public LoginServiceImpl(UsuarioRepository usuarioRepository, Validator validator, ConvertUsuario convertUsuario) {
-        this.usuarioRepository = usuarioRepository;
+    public LoginServiceImpl(UserRepository userRepository, Validator validator, ConvertUser convertUser) {
+        this.userRepository = userRepository;
         this.validator = validator;
-        this.convertUsuario = convertUsuario;
+        this.convertUser = convertUser;
     }
 
     @Override
-    public Optional<UsuarioDTO> login(LoginDTO body) {
+    public Optional<UserDTO> login(LoginDTO body) {
 
-        logger.info("Login del usuario : " + body.getUser());
-        Optional<UsuarioEntity> usuarioEntity =
-                Optional.of(this.usuarioRepository.findByEmail(body.getUser())
-                        .orElseThrow(UsuarioNotFoundException::new));
+        logger.info("User Login: " + body.getEmail());
+        Optional<UserEntity> usuarioEntity =
+                Optional.of(this.userRepository.findByEmail(body.getEmail())
+                        .orElseThrow(UserNotFoundException::new));
 
         validator.validarPassword(body, usuarioEntity.get());
 
         logger.info("Update lastLogin");
         updateLastLogin(usuarioEntity.get());
 
-        UsuarioDTO usuarioDTO = convertUsuario.convertUsuarioEntityToUsuarioDTO(usuarioEntity.get());
+        UserDTO userDTO = convertUser.convertUserEntityToUserDTO(usuarioEntity.get());
 
-        logger.info("Fin de Login del Usuario : " + body.getUser());
-        return Optional.of(usuarioDTO);
+        logger.info("User Login end: " + body.getEmail());
+        return Optional.of(userDTO);
     }
 
-    private void updateLastLogin(UsuarioEntity usuarioEntity) {
-        usuarioEntity.updateLastLogin();
-        try{
-            usuarioRepository.save(usuarioEntity);
+    private void updateLastLogin(UserEntity userEntity) {
+        userEntity.updateLastLogin();
+        try {
+            userRepository.save(userEntity);
         } catch (Exception e) {
             throw e;
         }

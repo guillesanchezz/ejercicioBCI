@@ -2,18 +2,18 @@ package com.exerciseBCI.dto;
 
 import java.util.List;
 
-public class RegistroDTO {
+public class RequestDTO {
 
 	private String name;
 	private String email;
 	private String password;
 	private List<PhoneDTO> phones;
 	
-	public RegistroDTO() {
+	public RequestDTO() {
 		super();
 	}
 
-	public RegistroDTO(String name, String email, String password, List<PhoneDTO> phones) {
+	public RequestDTO(String name, String email, String password, List<PhoneDTO> phones) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -53,10 +53,9 @@ public class RegistroDTO {
 		this.phones = phones;
 	}
 
-
 	@Override
 	public String toString() {
-		return "RegistroDTO{" +
+		return "RequestDTO{" +
 				"name='" + name + '\'' +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +

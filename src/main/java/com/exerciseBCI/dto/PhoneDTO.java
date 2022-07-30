@@ -1,26 +1,26 @@
 package com.exerciseBCI.dto;
 
 public class PhoneDTO {
-	private Integer number;
+	private Long number;
 	private Integer cityCode;
-	private Integer countryCode;
+	private String countryCode;
 	
 	public PhoneDTO() {
 		super();
 	}
 	
-	public PhoneDTO(Integer number, Integer cityCode, Integer countryCode) {
+	public PhoneDTO(Long number, Integer cityCode, String countryCode) {
 		super();
 		this.number = number;
 		this.cityCode = cityCode;
 		this.countryCode = countryCode;
 	}
 
-	public Integer getNumber() {
+	public Long getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(Long number) {
 		this.number = number;
 	}
 
@@ -32,11 +32,11 @@ public class PhoneDTO {
 		this.cityCode = cityCode;
 	}
 
-	public Integer getCountryCode() {
+	public String getCountryCode() {
 		return countryCode;
 	}
 
-	public void setCountryCode(Integer countryCode) {
+	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class EmailViolationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE_DEFAULT = "El correo ya esta registrado";
+	private static final String MESSAGE_DEFAULT = "The email is already registered";
 	
 	@Override
 	public String getMessage() {

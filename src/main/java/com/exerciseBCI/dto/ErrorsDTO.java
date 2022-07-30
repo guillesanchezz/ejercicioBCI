@@ -3,11 +3,11 @@ package com.exerciseBCI.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErroresDTO {
+public class ErrorsDTO {
 
     private List<ErrorDTO> error = new ArrayList<>();
 
-    public ErroresDTO() {
+    public ErrorsDTO() {
 
     }
 

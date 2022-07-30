@@ -2,9 +2,9 @@ package com.exerciseBCI.handler;
 
 import java.util.Objects;
 
-public class UsuarioNotFoundException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE_DEFAULT = "Usuario not Found";
+	private static final String MESSAGE_DEFAULT = "User not Found";
 	
 	@Override
 	public String getMessage() {
