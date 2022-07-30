@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3564444c-1f57-4546-9dcf-4dc861323969",
+		"_postman_id": "8e722186-94a9-488b-b1db-78236d5af9a8",
 		"name": "Ejercicio BCI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -49,90 +49,7 @@
 			"response": []
 		},
 		{
-			"name": "ObtenerUsuario",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWlsbGVybW8uc2FuY2hlekBkb21pbmlvLmNsIiwiYXV0aG9yaXRpZXMiOlsiUk9MX1VTVUFSSU8iXSwiaWF0IjoxNjAxODU3MjQ2LCJleHAiOjE2MDE4NTgxNDZ9.-vOYwmiiwWmGnQ8t8DG_2_faA6bSdbJGj9qW5VaJ8-wl4QJp28Hhbgstdw91GG7CZzALSEIljN_stBA1YiwQdg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8081/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ObtenerUsuarioPorId",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWlsbGVybW8uc2FuY2hlekBkb21pbmlvLmNsIiwiYXV0aG9yaXRpZXMiOlsiUk9MX1VTVUFSSU8iXSwiaWF0IjoxNjAxODU3MjQ2LCJleHAiOjE2MDE4NTgxNDZ9.-vOYwmiiwWmGnQ8t8DG_2_faA6bSdbJGj9qW5VaJ8-wl4QJp28Hhbgstdw91GG7CZzALSEIljN_stBA1YiwQdg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\r\n        \"name\": \"Juan Rodriguez\",\r\n        \"email\": \"guille.sasdfasdfasdfanchez@dominio.cl\",\r\n        \"password\": \"hunteMr\",\r\n        \"phones\": [\r\n            {\r\n                \"number\": \"1234567\",\r\n                \"cityCode\": \"1\",\t\t\t\r\n                \"countryCode\": \"57\"\r\n            },\r\n            {\r\n                \"number\": \"1222367\",\r\n                \"cityCode\": \"123\",\t\t\t\r\n                \"countryCode\": \"52323\"\r\n            }\r\n            \r\n        ]\r\n    }\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8081/users/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"users",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CrearUsuario",
+			"name": "CreateUser",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -168,85 +85,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "ReemplazarUsuario",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQGRvbWluaW8uY2wiLCJhdXRob3JpdGllcyI6WyJST0xfVVNVQVJJTyJdLCJpYXQiOjE2MDE4NTczNzYsImV4cCI6MTYwMTg1ODI3Nn0.RTw-9zq-AOwp9SoZfDP8OEk75w52XiMCgJ-QiNOCNJCXuv8iR9_e3KGRDgZr-YBs2NTjZgzKEPi_hoirkNHEUg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Juan Rodriguezz\",\r\n    \"email\": \"aasasd@dominiasos.cl\",\r\n    \"password\": \"M2asa22as\",\r\n    \"phones\": [\r\n        {\r\n            \"number\": 1234567,\r\n            \"cityCode\": 1,\r\n            \"countryCode\": 57\r\n        },\r\n        {\r\n            \"number\": 1222367,\r\n            \"cityCode\": 123,\r\n            \"countryCode\": 52323\r\n        }\r\n    ],\r\n    \"id\": 1,\r\n    \"created\": \"2020-10-02T13:07:13.952+00:00\",\r\n    \"modified\": \"2020-10-02T13:07:13.952+00:00\",\r\n    \"lastLogin\": \"2020-10-02T13:07:13.952+00:00\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWFuIFJvZHJpZ3VleiIsImlhdCI6MTYwMTY0NDAzMywiZXhwIjoxNjAxNjQ0OTMzLCJlbWFpbCI6ImFzZEBkb21pbmlvcy5jbCJ9.s-NQnpzfUcRUCoPKewyHIif6gDVp4cIrkJMrFnu7vrA\",\r\n    \"isActive\": true\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8081/users/4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"users",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "EliminarUsuario",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuQGRvbWluaW8uY2wiLCJhdXRob3JpdGllcyI6WyJST0xfVVNVQVJJTyJdLCJpYXQiOjE2MDE4NTczNzYsImV4cCI6MTYwMTg1ODI3Nn0.RTw-9zq-AOwp9SoZfDP8OEk75w52XiMCgJ-QiNOCNJCXuv8iR9_e3KGRDgZr-YBs2NTjZgzKEPi_hoirkNHEUg",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8081/users/4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"users",
-						"4"
-					]
-				}
-			},
-			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
