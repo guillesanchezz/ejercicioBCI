@@ -1,11 +1,11 @@
 package com.exerciseBCI.service.impl;
 
-import com.exerciseBCI.convert.ConvertUser;
 import com.exerciseBCI.dto.LoginDTO;
 import com.exerciseBCI.dto.UserDTO;
 import com.exerciseBCI.entity.UserEntity;
 import com.exerciseBCI.handler.UserNotFoundException;
 import com.exerciseBCI.repository.UserRepository;
+import com.exerciseBCI.security.GeneratorJWT;
 import com.exerciseBCI.service.LoginService;
 import com.exerciseBCI.util.Validator;
 import org.slf4j.Logger;
@@ -21,40 +21,33 @@ public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
     private final Validator validator;
-    private final ConvertUser convertUser;
+    private final GeneratorJWT generatorJWT;
 
-    public LoginServiceImpl(UserRepository userRepository, Validator validator, ConvertUser convertUser) {
+    public LoginServiceImpl(UserRepository userRepository, Validator validator, GeneratorJWT generatorJWT) {
         this.userRepository = userRepository;
         this.validator = validator;
-        this.convertUser = convertUser;
+        this.generatorJWT = generatorJWT;
     }
 
     @Override
     public Optional<UserDTO> login(LoginDTO body) {
-
         logger.info("User Login: " + body.getEmail());
-        Optional<UserEntity> usuarioEntity =
+        Optional<UserEntity> userEntity =
                 Optional.of(this.userRepository.findByEmail(body.getEmail())
                         .orElseThrow(UserNotFoundException::new));
 
-        validator.validarPassword(body, usuarioEntity.get());
+        validator.validatePassword(body, userEntity.get());
 
         logger.info("Update lastLogin");
-        updateLastLogin(usuarioEntity.get());
+        updateLastLogin(userEntity.get());
 
-        UserDTO userDTO = convertUser.convertUserEntityToUserDTO(usuarioEntity.get());
-
+        String token = generatorJWT.generateToken(userEntity.get().getEmail());
         logger.info("User Login end: " + body.getEmail());
-        return Optional.of(userDTO);
+        return Optional.of(UserDTO.from(userEntity.get(), token));
     }
 
     private void updateLastLogin(UserEntity userEntity) {
         userEntity.updateLastLogin();
-        try {
-            userRepository.save(userEntity);
-        } catch (Exception e) {
-            throw e;
-        }
-
+        userRepository.save(userEntity);
     }
 }

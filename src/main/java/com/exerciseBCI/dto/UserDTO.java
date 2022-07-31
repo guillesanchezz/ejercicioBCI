@@ -1,5 +1,7 @@
 package com.exerciseBCI.dto;
 
+import com.exerciseBCI.entity.UserEntity;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,10 +12,6 @@ public class UserDTO extends RequestDTO {
 	private LocalDateTime lastLogin;
 	private String token;
 	private Boolean isActive;
-	
-	public UserDTO() {
-		super();
-	}
 	
 	public UserDTO(String name, String email, String password, List<PhoneDTO> phones,
 				   String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, String token, Boolean isActive) {
@@ -26,52 +24,41 @@ public class UserDTO extends RequestDTO {
 			this.isActive = isActive;
 	}
 
-	public String getId() {
-		return id;
+	public static UserDTO from(UserEntity userEntity, String token){
+		return new UserDTO(
+				userEntity.getName(),
+				userEntity.getEmail(),
+				userEntity.getPassword(),
+				PhoneDTO.from(userEntity.getPhones()),
+				userEntity.getId().toString(),
+				userEntity.getCreated(),
+				userEntity.getModified(),
+				userEntity.getLastLogin(),
+				token,
+				userEntity.getIsActive());
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getId() {
+		return id;
 	}
 
 	public LocalDateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
-
 	public LocalDateTime getModified() {
 		return modified;
-	}
-
-	public void setModified(LocalDateTime modified) {
-		this.modified = modified;
 	}
 
 	public LocalDateTime getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(LocalDateTime lastLogin) {
-		this.lastLogin = lastLogin;
-	}
-
 	public String getToken() {
 		return token;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Boolean getIsActive() {
+	public Boolean getActive() {
 		return isActive;
 	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
 }

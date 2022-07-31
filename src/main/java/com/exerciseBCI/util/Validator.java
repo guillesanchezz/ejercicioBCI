@@ -13,15 +13,15 @@ import static java.util.Objects.isNull;
 @Component
 public class Validator {
 
-    private EmailValidator emailValidator;
-    private PasswordValidator passwordValidator;
+    private final EmailValidator emailValidator;
+    private final PasswordValidator passwordValidator;
 
     public Validator(EmailValidator emailValidator, PasswordValidator passwordValidator) {
         this.emailValidator = emailValidator;
         this.passwordValidator = passwordValidator;
     }
 
-    public void validarRegistroUsuario(RequestDTO usuario) {
+    public void validateUser(RequestDTO usuario) {
         if (isNull(usuario.getEmail()) || !emailValidator.validate(usuario.getEmail())) {
             throw new EmailValidationException();
         }
@@ -31,7 +31,7 @@ public class Validator {
         }
     }
 
-    public void validarPassword(LoginDTO login, UserEntity userEntity) {
+    public void validatePassword(LoginDTO login, UserEntity userEntity) {
         if (!login.getPassword().equals(userEntity.getPassword())){
             throw new PasswordIncorrectException();
         }

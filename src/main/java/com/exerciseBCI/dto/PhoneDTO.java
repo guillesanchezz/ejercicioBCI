@@ -1,48 +1,39 @@
 package com.exerciseBCI.dto;
 
+import com.exerciseBCI.entity.PhoneEntity;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PhoneDTO {
-	private Long number;
-	private Integer cityCode;
-	private String countryCode;
-	
-	public PhoneDTO() {
-		super();
-	}
-	
-	public PhoneDTO(Long number, Integer cityCode, String countryCode) {
-		super();
-		this.number = number;
-		this.cityCode = cityCode;
-		this.countryCode = countryCode;
-	}
+    private final Long number;
+    private final Integer cityCode;
+    private final String countryCode;
 
-	public Long getNumber() {
-		return number;
-	}
+    public PhoneDTO(Long number, Integer cityCode, String countryCode) {
+        super();
+        this.number = number;
+        this.cityCode = cityCode;
+        this.countryCode = countryCode;
+    }
 
-	public void setNumber(Long number) {
-		this.number = number;
-	}
+    public static List<PhoneDTO> from(List<PhoneEntity> phonesEntity) {
+        return phonesEntity.stream()
+                .map(phone -> new PhoneDTO(phone.getNumber(), phone.getCityCode()
+                        , phone.getCountryCode()))
+                .collect(Collectors.toList());
+    }
 
-	public Integer getCityCode() {
-		return cityCode;
-	}
+    public Long getNumber() {
+        return number;
+    }
 
-	public void setCityCode(Integer cityCode) {
-		this.cityCode = cityCode;
-	}
+    public Integer getCityCode() {
+        return cityCode;
+    }
 
-	public String getCountryCode() {
-		return countryCode;
-	}
+    public String getCountryCode() {
+        return countryCode;
+    }
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-
-
-	
-	
-	
-	
 }

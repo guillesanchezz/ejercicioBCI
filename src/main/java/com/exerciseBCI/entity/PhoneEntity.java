@@ -1,6 +1,10 @@
 package com.exerciseBCI.entity;
 
+import com.exerciseBCI.dto.PhoneDTO;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "phones")
@@ -26,6 +30,11 @@ public class PhoneEntity {
         this.cityCode = cityCode;
         this.countryCode = countryCode;
         this.user = user;
+    }
+
+    public static List<PhoneEntity> from(List<PhoneDTO> phones, UserEntity userEntity) {
+        return phones.stream().map(phoneDTO -> new PhoneEntity(phoneDTO.getNumber(), phoneDTO.getCityCode(),
+                phoneDTO.getCountryCode(), userEntity)).collect(Collectors.toList());
     }
 
     public Long getNumber() {

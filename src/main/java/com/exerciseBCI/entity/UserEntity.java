@@ -1,5 +1,6 @@
 package com.exerciseBCI.entity;
 
+import com.exerciseBCI.dto.RequestDTO;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -49,6 +50,19 @@ public class UserEntity implements Serializable {
         this.modified = modified;
         this.lastLogin = lastLogin;
         this.isActive = isActive;
+    }
+
+    public static UserEntity from(RequestDTO requestDTO){
+        UserEntity userEntity = new UserEntity(requestDTO.getName(),
+                requestDTO.getEmail(),
+                requestDTO.getPassword(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                true);
+        userEntity.setPhones(PhoneEntity.from(requestDTO.getPhones(), userEntity));
+
+        return userEntity;
     }
 
     public String getName() {

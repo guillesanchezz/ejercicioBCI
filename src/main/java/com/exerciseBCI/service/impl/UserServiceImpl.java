@@ -1,10 +1,11 @@
 package com.exerciseBCI.service.impl;
 
-import com.exerciseBCI.convert.ConvertUser;
-import com.exerciseBCI.dto.*;
+import com.exerciseBCI.dto.RequestDTO;
+import com.exerciseBCI.dto.UserDTO;
 import com.exerciseBCI.entity.UserEntity;
-import com.exerciseBCI.handler.*;
+import com.exerciseBCI.handler.EmailViolationException;
 import com.exerciseBCI.repository.UserRepository;
+import com.exerciseBCI.security.GeneratorJWT;
 import com.exerciseBCI.service.UserService;
 import com.exerciseBCI.util.Validator;
 import org.slf4j.Logger;
@@ -21,29 +22,30 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final Validator validator;
-    private final ConvertUser convertUser;
+    private final GeneratorJWT generatorJWT;
 
-    public UserServiceImpl(UserRepository userRepository, Validator validator, ConvertUser convertUser) {
+    public UserServiceImpl(UserRepository userRepository, Validator validator, GeneratorJWT generatorJWT) {
         this.userRepository = userRepository;
         this.validator = validator;
-        this.convertUser = convertUser;
+        this.generatorJWT = generatorJWT;
     }
 
     @Override
     public Optional<UserDTO> createUser(RequestDTO requestDTO) {
         logger.info("Create user :" + requestDTO.toString());
 
-        validator.validarRegistroUsuario(requestDTO);
+        validator.validateUser(requestDTO);
 
-        UserEntity userEntity = convertUser.convertRequestDTOToUserEntity(requestDTO);
+        UserEntity userEntity = UserEntity.from(requestDTO);
         try {
-            userEntity = userRepository.save(userEntity);
+            userRepository.save(userEntity);
         } catch (DataIntegrityViolationException e) {
             throw new EmailViolationException();
         }
-        logger.info("Created user id:" + userEntity.getId() );
-        return Optional.of(convertUser.convertUserEntityToUserDTO(userEntity));
+        logger.info("Created user id:" + userEntity.getId());
 
+        String token = generatorJWT.generateToken(userEntity.getEmail());
+        return Optional.of(UserDTO.from(userEntity, token));
     }
 
 }

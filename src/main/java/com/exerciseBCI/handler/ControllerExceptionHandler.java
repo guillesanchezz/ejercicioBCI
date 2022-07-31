@@ -44,6 +44,5 @@ public class ControllerExceptionHandler {
 		 ErrorsDTO errorsDTO = new ErrorsDTO();
 		 errorsDTO.getError().add(errorDTO);
 	    	return new ResponseEntity<>(errorsDTO,status);
-	        
 	    }
 }
