@@ -25,8 +25,7 @@ public class UserEntity implements Serializable {
     private String password;
 
     @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
