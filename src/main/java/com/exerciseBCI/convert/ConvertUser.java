@@ -27,7 +27,7 @@ public class ConvertUser {
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 true);
-        userEntity.setTelefonos(convertPhone.convertPhoneDTOToPhoneEntity(source.getPhones(), userEntity));
+        userEntity.setPhones(convertPhone.convertPhoneDTOToPhoneEntity(source.getPhones(), userEntity));
 
         return userEntity;
 

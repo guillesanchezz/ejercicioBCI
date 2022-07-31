@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ConvertPhone {
 
     public List<PhoneDTO> convertPhoneEntityToPhoneDTO(UserEntity source) {
-        return source.getTelefonos().stream()
+        return source.getPhones().stream()
                 .map(phoneEntity -> new PhoneDTO(phoneEntity.getNumber(), phoneEntity.getCityCode()
                         , phoneEntity.getCountryCode()))
                 .collect(Collectors.toList());

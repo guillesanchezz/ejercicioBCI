@@ -26,10 +26,11 @@ public class UserEntity implements Serializable {
 
     @OneToMany(
             mappedBy = "user",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PhoneEntity> telefonos = new ArrayList<>();
+    private List<PhoneEntity> phones = new ArrayList<>();
     private LocalDateTime created;
     private LocalDateTime modified;
     private LocalDateTime lastLogin;
@@ -75,12 +76,12 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
-    public List<PhoneEntity> getTelefonos() {
-        return telefonos;
+    public List<PhoneEntity> getPhones() {
+        return phones;
     }
 
-    public void setTelefonos(List<PhoneEntity> telefonos) {
-        this.telefonos = telefonos;
+    public void setPhones(List<PhoneEntity> phones) {
+        this.phones = phones;
     }
 
     public UUID getId() {
