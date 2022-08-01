@@ -6,6 +6,7 @@ import com.exerciseBCI.entity.UserEntity;
 import com.exerciseBCI.handler.EmailValidationException;
 import com.exerciseBCI.handler.PasswordIncorrectException;
 import com.exerciseBCI.handler.PasswordValidationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import static java.util.Objects.isNull;
@@ -32,7 +33,8 @@ public class Validator {
     }
 
     public void validatePassword(LoginDTO login, UserEntity userEntity) {
-        if (!login.getPassword().equals(userEntity.getPassword())){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        if (!encoder.matches(login.getPassword(), userEntity.getPassword())){
             throw new PasswordIncorrectException();
         }
     }

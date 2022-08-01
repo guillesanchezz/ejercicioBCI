@@ -33,6 +33,10 @@ public class RequestDTO {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public List<PhoneDTO> getPhones() {
 		return phones;
 	}

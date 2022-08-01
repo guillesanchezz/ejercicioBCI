@@ -42,8 +42,11 @@ public class LoginServiceImpl implements LoginService {
         updateLastLogin(userEntity.get());
 
         String token = generatorJWT.generateToken(userEntity.get().getEmail());
+        UserDTO userDTO = UserDTO.from(userEntity.get(), token);
+        userDTO.setPassword(body.getPassword());
+
         logger.info("User Login end: " + body.getEmail());
-        return Optional.of(UserDTO.from(userEntity.get(), token));
+        return Optional.of(userDTO);
     }
 
     private void updateLastLogin(UserEntity userEntity) {

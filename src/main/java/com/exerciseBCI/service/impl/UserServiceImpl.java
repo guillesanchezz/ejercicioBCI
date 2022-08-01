@@ -42,10 +42,13 @@ public class UserServiceImpl implements UserService {
         } catch (DataIntegrityViolationException e) {
             throw new EmailViolationException();
         }
-        logger.info("Created user id:" + userEntity.getId());
 
-        String token = generatorJWT.generateToken(userEntity.getEmail());
-        return Optional.of(UserDTO.from(userEntity, token));
+        String token = generatorJWT.generateToken(requestDTO.getEmail());
+        UserDTO userDTO = UserDTO.from(userEntity, token);
+        userDTO.setPassword(requestDTO.getPassword());
+
+        logger.info("Created user id:" + userEntity.getId());
+        return Optional.of(userDTO);
     }
 
 }
