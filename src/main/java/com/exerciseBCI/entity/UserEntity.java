@@ -1,12 +1,11 @@
 package com.exerciseBCI.entity;
 
 import com.exerciseBCI.dto.RequestDTO;
+import com.exerciseBCI.util.EncoderCustom;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -57,8 +56,8 @@ public class UserEntity implements Serializable {
     }
 
     public static UserEntity from(RequestDTO requestDTO){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-        String encodedPassword = encoder.encode(requestDTO.getPassword());
+        EncoderCustom encoderCustom = new EncoderCustom();
+        String encodedPassword = encoderCustom.encode(requestDTO.getPassword());
 
         UserEntity userEntity = new UserEntity(requestDTO.getName(),
                 requestDTO.getEmail(),

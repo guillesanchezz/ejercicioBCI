@@ -14,27 +14,19 @@ import static java.util.Objects.isNull;
 @Component
 public class Validator {
 
-    private final EmailValidator emailValidator;
-    private final PasswordValidator passwordValidator;
-
-    public Validator(EmailValidator emailValidator, PasswordValidator passwordValidator) {
-        this.emailValidator = emailValidator;
-        this.passwordValidator = passwordValidator;
-    }
-
-    public void validateUser(RequestDTO usuario) {
-        if (isNull(usuario.getEmail()) || !emailValidator.validate(usuario.getEmail())) {
+    public static void validateUser(RequestDTO requestDTO) {
+        if (isNull(requestDTO.getEmail()) || !EmailValidator.validate(requestDTO.getEmail())) {
             throw new EmailValidationException();
         }
 
-        if (isNull(usuario.getPassword()) || !passwordValidator.validate(usuario.getPassword())){
+        if (isNull(requestDTO.getPassword()) || !PasswordValidator.validate(requestDTO.getPassword())) {
             throw new PasswordValidationException();
         }
     }
 
     public void validatePassword(LoginDTO login, UserEntity userEntity) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-        if (!encoder.matches(login.getPassword(), userEntity.getPassword())){
+        BCryptPasswordEncoder encoder = new EncoderCustom();
+        if (!encoder.matches(login.getPassword(), userEntity.getPassword())) {
             throw new PasswordIncorrectException();
         }
     }
