@@ -1,22 +1,17 @@
 package com.exerciseBCI.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class ErrorsDTO {
 
     private List<ErrorDTO> error = new ArrayList<>();
-
-    public ErrorsDTO() {
-
-    }
-
-    public List<ErrorDTO> getError() {
-        return error;
-    }
-
-    public void setError(List<ErrorDTO> error) {
-        this.error = error;
-    }
 
 }

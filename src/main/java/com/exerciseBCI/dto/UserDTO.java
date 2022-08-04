@@ -1,10 +1,15 @@
 package com.exerciseBCI.dto;
 
 import com.exerciseBCI.entity.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter @Setter
 public class UserDTO extends RequestDTO {
 	private String id;
 	private LocalDateTime created;
@@ -12,7 +17,7 @@ public class UserDTO extends RequestDTO {
 	private LocalDateTime lastLogin;
 	private String token;
 	private Boolean isActive;
-	
+
 	public UserDTO(String name, String email, String password, List<PhoneDTO> phones,
 				   String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, String token, Boolean isActive) {
 			super(name, email, password, phones);
@@ -38,27 +43,4 @@ public class UserDTO extends RequestDTO {
 				userEntity.getIsActive());
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public LocalDateTime getCreated() {
-		return created;
-	}
-
-	public LocalDateTime getModified() {
-		return modified;
-	}
-
-	public LocalDateTime getLastLogin() {
-		return lastLogin;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public Boolean getActive() {
-		return isActive;
-	}
 }

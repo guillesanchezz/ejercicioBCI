@@ -29,6 +29,12 @@ dependencies {
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.2'
 
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.24'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
   }
 
 test {

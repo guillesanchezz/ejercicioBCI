@@ -10,39 +10,52 @@ import java.util.List;
 public class UserFixture {
 
     public static RequestDTO createRequestValid() {
-        PhoneDTO phoneDTO = new PhoneDTO(12345678L, 1, "2");
-        List<PhoneDTO> listPhoneDTO = new ArrayList<>();
-        listPhoneDTO.add(phoneDTO);
-
-        return new RequestDTO("Guillermo Sanchez", "guillermo.sanchez@globallogic.cl", "pass22M", listPhoneDTO);
+        return RequestDTO.builder().name("Guillermo Sanchez")
+                .email("guillermo.sanchez@globallogic.cl")
+                .password("pass22M")
+                .phones(getPhoneDTOS())
+                .build();
     }
 
     public static RequestDTO createRequestWithEmailInvalid() {
-        PhoneDTO phoneDTO = new PhoneDTO(12345678L, 1, "2");
-        List<PhoneDTO> listPhoneDTO = new ArrayList<>();
-        listPhoneDTO.add(phoneDTO);
-
-        return new RequestDTO("Guillermo Sanchez", "guillermo.sanchezgloballogic.cl", "pass22M", listPhoneDTO);
+        return RequestDTO.builder()
+                .name("Guillermo Sanchez")
+                .email("guillermo.sanchezgloballogic.cl")
+                .password("pass22M")
+                .phones(getPhoneDTOS())
+                .build();
     }
 
     public static RequestDTO createRequestWithPasswordInvalid() {
-        PhoneDTO phoneDTO = new PhoneDTO(12345678L, 1, "2");
-        List<PhoneDTO> listPhoneDTO = new ArrayList<>();
-        listPhoneDTO.add(phoneDTO);
-
-        return new RequestDTO("Guillermo Sanchez", "guillermo.sanchez@globallogic.cl", "pass2M", listPhoneDTO);
+        return RequestDTO.builder()
+                .name("Guillermo Sanchez")
+                .email("guillermo.sanchez@globallogic.cl")
+                .password("pass2M")
+                .phones(getPhoneDTOS())
+                .build();
     }
 
     public static RequestDTO createRequestWithEmailRegistered() {
-        PhoneDTO phoneDTO = new PhoneDTO(12345678L, 1, "2");
+        return RequestDTO.builder()
+                .name("Guillermo Sanchez")
+                .email("guillermo.sanchez@dominio.cl")
+                .password("pass22M")
+                .phones(getPhoneDTOS())
+                .build();
+    }
+
+    private static List<PhoneDTO> getPhoneDTOS() {
+        PhoneDTO phoneDTO = PhoneDTO.builder().number(12345678L).cityCode(1).countryCode("2").build();
         List<PhoneDTO> listPhoneDTO = new ArrayList<>();
         listPhoneDTO.add(phoneDTO);
-
-        return new RequestDTO("Guillermo Sanchez", "guillermo.sanchez@dominio.cl", "pass22M", listPhoneDTO);
+        return listPhoneDTO;
     }
 
     public static LoginDTO createRequestValidToLogin() {
-        return new LoginDTO("guillermo.sanchez@dominio.cl", "pass22M");
+        return LoginDTO.builder()
+                .email("guillermo.sanchez@dominio.cl")
+                .password("pass22M")
+                .build();
     }
 
 }

@@ -1,29 +1,16 @@
 package com.exerciseBCI.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter @Setter
+@AllArgsConstructor
 public class ErrorDTO {
 
     private final LocalDateTime timestamp;
     private final Integer code;
     private final String detail;
-
-    public ErrorDTO(LocalDateTime timestamp, Integer code, String detail) {
-        super();
-        this.timestamp = timestamp;
-        this.code = code;
-        this.detail = detail;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
 }

@@ -1,6 +1,9 @@
 package com.exerciseBCI.entity;
 
 import com.exerciseBCI.dto.RequestDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +16,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Getter @Setter
+@NoArgsConstructor
 @Table(name = "users")
 public class UserEntity implements Serializable {
     /**
@@ -38,9 +43,6 @@ public class UserEntity implements Serializable {
     private LocalDateTime lastLogin;
     private Boolean isActive;
 
-    public UserEntity() {
-        super();
-    }
 
     public UserEntity(String name, String email, String password,
                       LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin, Boolean isActive) {
@@ -68,78 +70,6 @@ public class UserEntity implements Serializable {
         userEntity.setPhones(PhoneEntity.from(requestDTO.getPhones(), userEntity));
 
         return userEntity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<PhoneEntity> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(List<PhoneEntity> phones) {
-        this.phones = phones;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
-    public LocalDateTime getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(LocalDateTime lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
     }
 
     public void updateLastLogin() {
